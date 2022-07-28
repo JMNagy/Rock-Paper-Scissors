@@ -5,6 +5,7 @@ function game() {
   for (let i = 1; i <= 5; i++) {
     playRound(i);
   }
+  document.querySelector("button").textContent = "Play New Game";
   logWins();
   //play the game
   //play five rounds

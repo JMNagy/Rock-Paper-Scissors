@@ -29,14 +29,27 @@ function playRound(playerChoice) {
 
   winners.push(winner);
   tallyWins();
+  displayRound(playerChoice, computerChoice, winner);
 }
+function displayRound(playerChoice, computerChoice, winner) {
+  document.querySelector(".playerChoice").textContent = `You Chose: ${
+    playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1)
+  }`;
+  document.querySelector(
+    ".computerChoice"
+  ).textContent = `The Computer Chose: ${
+    computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)
+  }`;
+  document.querySelector(".ties").textContent = `Ties: ${ties}`;
+}
+
 function tallyWins() {
-  let pWinCount = winners.filter((winner) => winner == "Player").length;
-  let cWinCount = winners.filter((winner) => winner == "Computer").length;
-  let ties = winners.filter((winner) => winner == "Tie").length;
+  const pWinCount = winners.filter((winner) => winner == "Player").length;
+  const cWinCount = winners.filter((winner) => winner == "Computer").length;
+  const ties = winners.filter((winner) => winner == "Tie").length;
   document.querySelector(".playerScore").textContent = `Score: ${pWinCount}`;
   document.querySelector(".computerScore").textContent = `Score: ${cWinCount}`;
-  document.querySelector(".ties").textContent = `Score: ${cWinCount}`;
+  document.querySelector(".ties").textContent = `Score: ${ties}`;
 }
 
 function computerSelect() {

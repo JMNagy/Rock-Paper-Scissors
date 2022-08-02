@@ -2,16 +2,16 @@ const choices = ["rock", "paper", "scissors"];
 let winners = [];
 
 function resetGame() {
-  winner = [];
+  winners = [];
   document.querySelector(".playerScore").textContent = "Score: 0";
-  document.querySelector(".computerSCore").textContent = "Score: 0";
+  document.querySelector(".computerScore").textContent = "Score: 0";
   document.querySelector(".ties").textContent = "Ties: 0";
   document.querySelector(".winner").textContent = "";
   document.querySelector(".playerChoice").textContent = "";
   document.querySelector(".computerChoice").textContent = "";
   document.querySelector(".reset").style.display = "none";
-  //reset game
 }
+
 function startGame() {
   //play game until someone wins 5 rounds
   let imgs = document.querySelectorAll("img");
@@ -34,6 +34,9 @@ function playRound(playerChoice) {
   const computerChoice = computerSelect();
 
   const winner = checkWinner(playerChoice, computerChoice);
+  winners.push(winner);
+  tallyWins();
+  displayRound(playerChoice, computerChoice, winner);
   wins = checkWins();
   if (wins == 5) {
     displayEnd();
@@ -50,10 +53,6 @@ function playRound(playerChoice) {
     }
     document.querySelector(".reset").style.display = "flex";
   }
-
-  winners.push(winner);
-  tallyWins();
-  displayRound(playerChoice, computerChoice, winner);
 }
 function displayRound(playerChoice, computerChoice, winner) {
   document.querySelector(".playerChoice").textContent = `You Chose: ${
@@ -118,3 +117,9 @@ function checkWinner(choiceP, choiceC) {
     return "Computer";
   }
 }
+function setWins() {
+  const pWinCount = winners.filter((item) => item == "Player").length;
+  const cWinCount = winners.filter((item) => item == "Computer").length;
+  const ties = winners.filter((item) => item == "Tie").length;
+}
+startGame();
